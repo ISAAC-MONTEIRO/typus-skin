@@ -1,0 +1,19 @@
+{
+  "name": "Minha skin",
+  "author": "Seu nome",
+  "version": "1.0.0",
+  "description": "Uma frase sobre a skin (aparece ao passar o mouse na lista de skins).",
+  "tokens": {
+    "--typ-color-primary": "#ff7a59",
+    "--typ-rgb-primary": "255, 122, 89",
+    "--typ-color-on-primary": "#1f0d07",
+    "--typ-rgb-on-primary": "31, 13, 7",
+
+    "--typ-c-shell-app": "#1a1412",
+    "--typ-c-shell-sidebar": "#231b18",
+    "--typ-c-shell-content": "#231b18",
+    "--typ-c-shell-main": "#2b211d",
+
+    "--typ-radius-lg": "10px"
+  }
+}
