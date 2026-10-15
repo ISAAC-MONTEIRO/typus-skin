@@ -5,6 +5,20 @@ tela. Elas são só **CSS + variáveis** — não mudam o funcionamento do app n
 
 Uma skin carregada fica **salva na sua conta** e aparece em todos os seus dispositivos.
 
+## Baixar as skins prontas
+
+Os arquivos prontos para instalar ficam na [última versão (Releases)](https://github.com/ISAAC-MONTEIRO/typus-skin/releases/latest):
+
+| Arquivo | O que é |
+|---|---|
+| [`typus-98.typus-skin`](https://github.com/ISAAC-MONTEIRO/typus-skin/releases/latest/download/typus-98.typus-skin) | Typus 98 — o visual do Windows 98 |
+| [`liquid-glass.typus-skin`](https://github.com/ISAAC-MONTEIRO/typus-skin/releases/latest/download/liquid-glass.typus-skin) | Liquid Glass — vidro claro, inspirado no iOS |
+| [`modelo.typus-skin`](https://github.com/ISAAC-MONTEIRO/typus-skin/releases/latest/download/modelo.typus-skin) | o modelo padrão, para testar antes de criar a sua |
+
+Para instalar: no TYPUS, **Configurações → Personalização → enviar skin**, escolha o arquivo e
+confirme "Manter". Para criar uma skin nova a partir delas, use as pastas `modelo/` e `skins/` deste
+repositório (veja abaixo).
+
 ```
 typus-skin/
 ├── modelo/              ← copie esta pasta para começar

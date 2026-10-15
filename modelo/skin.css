@@ -1,0 +1,70 @@
+/*
+ * Minha skin — CSS extra
+ *
+ * Comece pelo skin.json: cores, cantos, sombras e fontes são variáveis
+ * (--typ-*) e resolvem quase tudo. Use este arquivo só para o que as
+ * variáveis não alcançam: bordas especiais, texturas, animações.
+ *
+ * REGRAS (o app aplica estas mesmas regras e remove o que estiver fora):
+ *   - Use os ganchos [data-typus="..."] para escolher as áreas do app.
+ *     Lista completa em docs/ganchos.md. NÃO use classes (.algo): elas mudam
+ *     a cada versão do app e a sua skin quebraria.
+ *   - Não carregue nada de fora (outros arquivos CSS, imagens ou fontes da
+ *     internet). Imagens e fontes só embutidas no próprio arquivo, em
+ *     base64 (veja "Imagens e fontes" no README).
+ *   - Nada de JavaScript.
+ *   - Evite escrever o nome das regras proibidas até em comentários: o app
+ *     as remove do texto inteiro, inclusive de dentro de comentários.
+ *
+ * Dica: apague os exemplos que não quiser. Tudo o que está aqui é opcional.
+ */
+
+/* ------------------------------------------------- exemplo: o chat --- */
+/* a área das mensagens com cantos maiores e uma borda fina */
+[data-typus="chat"] {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 122, 89, 0.25);
+}
+
+/* -------------------------------------- exemplo: mensagem com mouse --- */
+[data-typus="message"]:hover {
+  background: rgba(255, 122, 89, 0.08);
+}
+
+/* ------------------------------------ exemplo: campo de digitar --- */
+[data-typus="composer"] {
+  border-radius: 999px;
+}
+
+/* ---------------------------------------------- exemplo: botões --- */
+/* todos os botões em cápsula; o principal (data-variant="filled") com degradê */
+[data-typus="button"] {
+  border-radius: 999px !important;
+}
+
+[data-typus="button"][data-variant="filled"] {
+  background: linear-gradient(180deg, #ff9a7a, #ff7a59) !important;
+}
+
+/* -------------------------------------------- exemplo: animação --- */
+/* respeite quem pediu menos movimento (o app também desliga as suas) */
+@keyframes minha-skin-surgir {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-typus="menu"] {
+  animation: minha-skin-surgir 0.15s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-typus="menu"] {
+    animation: none;
+  }
+}

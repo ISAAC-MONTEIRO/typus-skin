@@ -1,0 +1,608 @@
+/*
+ * Liquid Glass — skin para o TYPUS
+ *
+ * Inspirada no Liquid Glass do iOS: vidro claro e brilhante, reflexo nas
+ * bordas, botões em cápsula, cantos amplos e movimento com mola.
+ *
+ * Cores, cantos e sombras ficam no skin.json (variáveis --typ-*). Aqui ficam o
+ * vidro de cada caixa e o jeito de cada controle, presos aos ganchos estáveis
+ * do app ([data-typus="..."]), nunca a classes geradas.
+ *
+ * Contraste: todo painel é pelo menos ~60 % branco antes do desfoque, e o
+ * texto é quase preto. Assim continua legível sobre qualquer papel de parede,
+ * claro ou escuro.
+ */
+
+body {
+  --lg-blur: blur(28px) saturate(180%);
+  --lg-glass: rgba(255, 255, 255, 0.62);
+  --lg-glass-thick: rgba(255, 255, 255, 0.8);
+  --lg-glass-thin: rgba(255, 255, 255, 0.45);
+  --lg-ink: #1c1c1e;
+  --lg-ink-2: #48484f;
+  --lg-blue: #007aff;
+  --lg-red: #ff3b30;
+
+  /* reflexo: brilho forte em cima, filete claro embaixo e contorno suave */
+  --lg-rim: inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  --lg-float: 0 8px 32px rgba(30, 40, 90, 0.14), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --lg-lift: 0 2px 10px rgba(30, 40, 90, 0.1);
+  /* luz que bate de cima no vidro */
+  --lg-sheen: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.12) 40%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  --lg-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* MDUI segue os mesmos cantos */
+  --mdui-shape-corner-extra-small: 12px;
+}
+
+[data-typus="app"],
+[data-typus="login"],
+[data-typus="popover"],
+[data-typus="settings"],
+[data-typus="dialog"] {
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(0, 122, 255, 0.25);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(0, 122, 255, 0.45) !important;
+  outline-offset: 2px !important;
+}
+
+/* ondas do Material ficam bem leves, quase um brilho */
+md-ripple {
+  --md-ripple-hover-color: #ffffff;
+  --md-ripple-hover-opacity: 0.25;
+  --md-ripple-pressed-color: #ffffff;
+  --md-ripple-pressed-opacity: 0.4;
+}
+
+/* ========================================================== vidro === */
+[data-typus="rail"],
+[data-typus="channels"],
+[data-typus="members"],
+[data-typus="user-footer"],
+[data-typus="chat"],
+[data-typus="call"],
+[data-typus="settings-nav"],
+[data-typus="settings-page"],
+[data-typus="login-card"],
+[data-typus="server-card"],
+[data-typus="quick-switcher"],
+[data-typus="dialog"] > div,
+[data-typus="menu"],
+[data-typus="popover"] > *:not([data-typus="tooltip"]) {
+  background-color: var(--lg-glass) !important;
+  background-image: var(--lg-sheen) !important;
+  color: var(--lg-ink);
+  border: none !important;
+  backdrop-filter: var(--lg-blur) !important;
+  box-shadow: var(--lg-rim), var(--lg-float) !important;
+}
+
+/* painéis grandes: cantos amplos e contínuos */
+[data-typus="rail"],
+[data-typus="channels"],
+[data-typus="members"],
+[data-typus="chat"],
+[data-typus="call"],
+[data-typus="settings-page"],
+[data-typus="login-card"],
+[data-typus="dialog"] > div,
+[data-typus="quick-switcher"] {
+  border-radius: 28px !important;
+}
+
+[data-typus="user-footer"],
+[data-typus="server-card"],
+[data-typus="settings-nav"],
+[data-typus="menu"],
+[data-typus="popover"] > *:not([data-typus="tooltip"]) {
+  border-radius: 22px !important;
+}
+
+/* a lista de canais encosta na faixa da seta: esse lado fica reto, sem
+   fresta no canto */
+[data-typus="channels"] {
+  border-radius: 28px 0 0 28px !important;
+}
+
+/* camadas que flutuam por cima ficam mais opacas */
+[data-typus="dialog"] > div,
+[data-typus="menu"],
+[data-typus="quick-switcher"],
+[data-typus="popover"] > *:not([data-typus="tooltip"]) {
+  background-color: var(--lg-glass-thick) !important;
+  box-shadow: var(--lg-rim), 0 24px 64px rgba(30, 40, 90, 0.22) !important;
+}
+
+/* o painel do servidor dentro da barra lateral é vidro mais fino */
+[data-typus="server-card"] {
+  background-color: var(--lg-glass-thin) !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+  overflow: hidden;
+}
+
+/* o rodapé da pessoa flutua como uma cápsula */
+[data-typus="user-footer"] {
+  margin: 8px;
+}
+
+/* cabeçalho do canal: barra de vidro flutuante */
+[data-typus="header"] {
+  background-color: var(--lg-glass-thick) !important;
+  background-image: var(--lg-sheen) !important;
+  color: var(--lg-ink) !important;
+  backdrop-filter: var(--lg-blur) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+  margin: 8px 8px 0;
+}
+
+/* configurações: o fundo atrás das janelas fica desfocado e claro */
+[data-typus="settings"] {
+  background: rgba(240, 242, 250, 0.45) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+}
+
+[data-typus="settings-nav"] {
+  margin: 12px;
+}
+
+[data-typus="settings-page"] {
+  margin: 12px 0;
+}
+
+/* tela de entrar: o cartão de vidro sobre o degradê */
+[data-typus="login"],
+[data-typus="login"] > div {
+  background: var(--typ-c-shell-app) !important;
+}
+
+[data-typus="login-card"] {
+  padding: 28px !important;
+}
+
+/* início: os widgets viram cartões de vidro */
+[data-typus="home"] {
+  background: transparent !important;
+}
+
+/* ====================================================== mensagens === */
+[data-typus="message"] {
+  border-radius: 16px;
+  transition: background-color 0.2s ease;
+}
+
+[data-typus="message"]:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* campo de digitar: cápsula de vidro */
+[data-typus="composer"] {
+  background-color: var(--lg-glass-thick) !important;
+  border: none !important;
+  border-radius: 26px !important;
+  backdrop-filter: var(--lg-blur) !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+}
+
+[data-typus="composer"]:focus-within {
+  box-shadow: var(--lg-rim), 0 0 0 4px rgba(0, 122, 255, 0.18),
+    var(--lg-lift) !important;
+}
+
+/* itens das listas: cápsulas; o escolhido em azul sólido */
+[data-typus="nav-item"] {
+  --color: var(--lg-ink) !important;
+  border-radius: 14px !important;
+  transition: background-color 0.2s ease, transform 0.3s var(--lg-spring);
+}
+
+[data-typus="nav-item"][data-attention="normal"] {
+  --color: var(--lg-ink-2) !important;
+}
+
+[data-typus="nav-item"][data-attention="muted"] {
+  --color: #8e8e93 !important;
+}
+
+[data-typus="nav-item"][data-attention="active"] {
+  --color: var(--lg-ink) !important;
+  font-weight: 600;
+}
+
+[data-typus="nav-item"]:hover {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-typus="nav-item"][data-attention="selected"] {
+  --color: #ffffff !important;
+  background: linear-gradient(180deg, #2b8cff 0%, #007aff 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 4px 14px rgba(0, 122, 255, 0.3) !important;
+}
+
+[data-typus="nav-item"][data-attention="selected"] * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* ========================================================= botões === */
+/* cápsulas de vidro; o botão principal é azul com brilho */
+[data-typus="button"] {
+  border-radius: 999px !important;
+  border: none !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  background-image: var(--lg-sheen) !important;
+  color: var(--lg-blue) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+  transition: transform 0.35s var(--lg-spring), box-shadow 0.2s ease,
+    background-color 0.2s ease !important;
+}
+
+[data-typus="button"] * {
+  color: inherit !important;
+}
+
+[data-typus="button"]:hover {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+}
+
+[data-typus="button"]:active {
+  transform: scale(0.96);
+}
+
+[data-typus="button"][data-variant="filled"],
+[data-typus="button"][data-variant="primary"] {
+  background-color: var(--lg-blue) !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.32) 0%,
+    rgba(255, 255, 255, 0) 55%
+  ) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08), 0 6px 18px rgba(0, 122, 255, 0.32) !important;
+}
+
+[data-typus="button"][data-variant="filled"]:hover,
+[data-typus="button"][data-variant="primary"]:hover {
+  background-color: #1a85ff !important;
+}
+
+[data-typus="button"][data-variant="text"] {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+}
+
+[data-typus="button"][data-variant="text"]:hover {
+  background-color: rgba(0, 122, 255, 0.08) !important;
+}
+
+[data-typus="button"][data-variant="_error"],
+[data-typus="button"][data-variant="error"] {
+  background-color: var(--lg-red) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 6px 18px rgba(255, 59, 48, 0.3) !important;
+}
+
+[data-typus="button"][data-variant="success"] {
+  background-color: #34c759 !important;
+  color: #ffffff !important;
+}
+
+[data-typus="button"]:disabled,
+[data-typus="button"][aria-disabled="true"] {
+  background-color: rgba(120, 120, 128, 0.12) !important;
+  background-image: none !important;
+  color: rgba(60, 60, 67, 0.38) !important;
+  box-shadow: none !important;
+}
+
+/* botões de ícone: círculos de vidro */
+[data-typus="icon-button"] {
+  border-radius: 999px !important;
+  color: var(--lg-ink);
+  transition: transform 0.35s var(--lg-spring), background-color 0.2s ease !important;
+}
+
+[data-typus="icon-button"]:hover {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: var(--lg-rim) !important;
+}
+
+[data-typus="icon-button"]:active {
+  transform: scale(0.9);
+}
+
+[data-typus="icon-button"][data-variant="filled"] {
+  background-color: var(--lg-blue) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 4px 14px rgba(0, 122, 255, 0.3) !important;
+}
+
+[data-typus="icon-button"][data-variant="tonal"],
+[data-typus="icon-button"][data-variant="outlined"] {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  background-image: var(--lg-sheen) !important;
+  border: none !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+}
+
+[data-typus="icon-button"]:disabled {
+  color: rgba(60, 60, 67, 0.3) !important;
+}
+
+/* controles da chamada: a barra flutuante de vidro, botões redondos */
+[data-typus="call-controls"] {
+  background-color: var(--lg-glass-thick) !important;
+  background-image: var(--lg-sheen) !important;
+  backdrop-filter: var(--lg-blur) !important;
+  border-radius: 999px !important;
+  box-shadow: var(--lg-rim), var(--lg-float) !important;
+}
+
+[data-typus="call-controls"] button {
+  border-radius: 999px !important;
+}
+
+/* FAB: botão azul flutuante */
+[data-typus="fab"]::part(button) {
+  border-radius: 999px;
+  background: var(--lg-blue);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 8px 24px rgba(0, 122, 255, 0.35);
+}
+
+/* ========================================================== campos === */
+[data-typus="input"]:is(input, textarea),
+[data-typus="quick-switcher"] input {
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: var(--lg-ink) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 2px rgba(30, 40, 90, 0.08),
+    inset 0 0 0 1px rgba(60, 60, 67, 0.1) !important;
+  outline: none !important;
+  transition: box-shadow 0.2s ease;
+}
+
+[data-typus="input"]:is(input, textarea):focus,
+[data-typus="quick-switcher"] input:focus {
+  box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.6),
+    0 0 0 4px rgba(0, 122, 255, 0.18) !important;
+}
+
+mdui-text-field[data-typus="input"]::part(container) {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 2px rgba(30, 40, 90, 0.08),
+    inset 0 0 0 1px rgba(60, 60, 67, 0.12);
+}
+
+mdui-text-field[data-typus="input"][focused]::part(container) {
+  box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.6),
+    0 0 0 4px rgba(0, 122, 255, 0.18);
+}
+
+mdui-text-field[data-typus="input"]::part(label) {
+  color: var(--lg-ink-2);
+  background: transparent;
+}
+
+mdui-text-field[data-typus="input"]::part(input) {
+  color: var(--lg-ink);
+}
+
+/* seletores: cápsula de vidro */
+[data-typus="select"] {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  color: var(--lg-ink) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 0 0 1px rgba(60, 60, 67, 0.12), var(--lg-lift) !important;
+}
+
+/* =================================== checkbox, slider, abas, switch === */
+mdui-checkbox[data-typus="checkbox"] {
+  --mdui-color-primary: 0, 122, 255;
+}
+
+mdui-checkbox[data-typus="checkbox"]::part(control) {
+  border-radius: 999px;
+}
+
+input[data-typus="checkbox"] {
+  accent-color: var(--lg-blue);
+}
+
+mdui-radio[data-typus="radio"] {
+  --mdui-color-primary: 0, 122, 255;
+}
+
+/* slider do iOS: trilho fino e alça branca com sombra */
+mdui-slider[data-typus="slider"] {
+  --mdui-color-primary: 0, 122, 255;
+}
+
+mdui-slider[data-typus="slider"]::part(track-inactive) {
+  background: rgba(120, 120, 128, 0.2);
+  border-radius: 999px;
+}
+
+mdui-slider[data-typus="slider"]::part(track-active) {
+  background: var(--lg-blue);
+  border-radius: 999px;
+}
+
+mdui-slider[data-typus="slider"]::part(handle) {
+  background: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 0.5px 4px rgba(0, 0, 0, 0.12), 0 6px 13px rgba(0, 0, 0, 0.12);
+}
+
+/* controle segmentado do iOS */
+[data-typus="tab"],
+[data-typus="switch"] {
+  background: rgba(118, 118, 128, 0.12) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 2px;
+}
+
+[data-typus="tab"] mdui-segmented-button {
+  border: none !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: var(--lg-ink) !important;
+  --mdui-shape-corner-full: 999px;
+}
+
+[data-typus="tab"] mdui-segmented-button[selected] {
+  background: #ffffff !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), 0 3px 1px rgba(0, 0, 0, 0.04) !important;
+  font-weight: 600 !important;
+}
+
+[data-typus="switch"] > * {
+  border-radius: 999px !important;
+}
+
+/* listas de opções: linhas de vidro, como nos Ajustes do iOS */
+[data-typus="card"] {
+  background-color: rgba(255, 255, 255, 0.62) !important;
+  background-image: var(--lg-sheen) !important;
+  color: var(--lg-ink) !important;
+  border: none !important;
+  border-radius: 18px !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+  transition: transform 0.35s var(--lg-spring), background-color 0.2s ease !important;
+}
+
+[data-typus="card"]:hover {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-typus="card"]:active {
+  transform: scale(0.98);
+}
+
+/* ====================================================== flutuantes === */
+[data-typus="tooltip"] {
+  background: rgba(255, 255, 255, 0.86) !important;
+  color: var(--lg-ink) !important;
+  backdrop-filter: var(--lg-blur);
+  border-radius: 12px !important;
+  box-shadow: var(--lg-rim), 0 4px 16px rgba(30, 40, 90, 0.14) !important;
+  font-weight: 500;
+}
+
+[data-typus="menu"] {
+  padding: 6px !important;
+}
+
+[data-typus="menu"] :is(a, [role="menuitem"]) {
+  border-radius: 12px !important;
+}
+
+[data-typus="menu"] :is(a, [role="menuitem"]):hover {
+  background: rgba(0, 122, 255, 0.12) !important;
+}
+
+/* menus e janelas surgem com mola, como no iOS */
+@keyframes typ-lg-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+[data-typus="menu"],
+[data-typus="dialog"] > div,
+[data-typus="quick-switcher"] {
+  animation: typ-lg-pop 0.42s var(--lg-spring);
+}
+
+/* escolher imagem (ícone, avatar, banner): vidro com contorno */
+[data-typus="image-input"] {
+  background: rgba(255, 255, 255, 0.55) !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+}
+
+/* ========================================================== avatares === */
+[data-typus="avatar"] {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+/* ================================================= setas das laterais === */
+[data-typus="edge-flag"] button {
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: var(--lg-ink) !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+}
+
+[data-typus="edge-flag"] button:hover {
+  background: var(--lg-blue) !important;
+  color: #ffffff !important;
+}
+
+/* =================================================== barras de rolagem === */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(60, 60, 67, 0.28);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(60, 60, 67, 0.45);
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* quem pede menos movimento não recebe as molas */
+@media (prefers-reduced-motion: reduce) {
+  [data-typus="menu"],
+  [data-typus="dialog"] > div,
+  [data-typus="quick-switcher"] {
+    animation: none;
+  }
+
+  [data-typus="button"]:active,
+  [data-typus="icon-button"]:active,
+  [data-typus="card"]:active {
+    transform: none;
+  }
+}

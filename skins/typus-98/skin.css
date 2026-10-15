@@ -1,0 +1,625 @@
+/*
+ * Typus 98 — skin para o TYPUS
+ *
+ * Cores, cantos e sombras ficam no skin.json (variáveis --typ-*). Aqui fica o
+ * que as variáveis não cobrem: o relevo de cada caixa, as barras de título e
+ * o jeito de cada controle. Tudo preso aos ganchos estáveis do app
+ * ([data-typus="..."]), nunca a classes geradas, que mudam a cada versão.
+ *
+ * Regras da casa: cantos retos, só as cores da paleta do 98, botões que
+ * afundam ao clicar e nada de animações suaves.
+ */
+
+body {
+  --w98-face: #c0c0c0;
+  --w98-light: #dfdfdf;
+  --w98-hi: #ffffff;
+  --w98-shadow: #808080;
+  --w98-dark: #0a0a0a;
+  --w98-navy: #000080;
+  --w98-title: linear-gradient(90deg, #000080, #1084d0);
+  --w98-title-off: linear-gradient(90deg, #808080, #b5b5b5);
+
+  /* botão / janela saltados, caixa afundada, e a moldura do campo */
+  --w98-raised: inset -1px -1px var(--w98-dark), inset 1px 1px var(--w98-hi),
+    inset -2px -2px var(--w98-shadow), inset 2px 2px var(--w98-light);
+  --w98-window: inset -1px -1px var(--w98-dark), inset 1px 1px var(--w98-light),
+    inset -2px -2px var(--w98-shadow), inset 2px 2px var(--w98-hi);
+  --w98-sunken: inset -1px -1px var(--w98-hi), inset 1px 1px var(--w98-shadow),
+    inset -2px -2px var(--w98-light), inset 2px 2px var(--w98-dark);
+  --w98-pressed: inset -1px -1px var(--w98-hi), inset 1px 1px var(--w98-dark),
+    inset -2px -2px var(--w98-light), inset 2px 2px var(--w98-shadow);
+  --w98-drop: 2px 2px 0 rgba(0, 0, 0, 0.35);
+
+  /* MDUI desenha cantos e ondas por conta própria */
+  --mdui-shape-corner-full: 0;
+  --mdui-shape-corner-extra-small: 0;
+}
+
+/* fonte do sistema, sem suavização nem espaçamento extra */
+[data-typus="app"],
+[data-typus="app"] *,
+[data-typus="login"],
+[data-typus="login"] *,
+[data-typus="popover"] *,
+[data-typus="settings"] *,
+[data-typus="dialog"] * {
+  -webkit-font-smoothing: none;
+  letter-spacing: 0 !important;
+  text-shadow: none;
+}
+
+md-ripple {
+  display: none !important;
+}
+
+::selection {
+  background: var(--w98-navy);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 1px dotted #000000 !important;
+  outline-offset: -4px !important;
+}
+
+/* ======================================================== janelas === */
+/* cada painel é uma janela cinza com borda em relevo */
+[data-typus="rail"],
+[data-typus="channels"],
+[data-typus="members"],
+[data-typus="user-footer"],
+[data-typus="call"],
+[data-typus="home"],
+[data-typus="settings-nav"],
+[data-typus="settings-page"],
+[data-typus="quick-switcher"],
+[data-typus="login-card"],
+[data-typus="dialog"] > div,
+[data-typus="menu"],
+[data-typus="popover"] > *,
+[data-typus="popover"] [role="dialog"] {
+  background: var(--w98-face) !important;
+  color: #000000;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-window) !important;
+  backdrop-filter: none !important;
+}
+
+[data-typus="dialog"] > div,
+[data-typus="menu"],
+[data-typus="quick-switcher"],
+[data-typus="login-card"],
+[data-typus="popover"] > * {
+  box-shadow: var(--w98-window), var(--w98-drop) !important;
+}
+
+/* o cartão do servidor: barra de título + janela */
+[data-typus="server-card"] {
+  background: var(--w98-face) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-window) !important;
+  padding: 3px;
+}
+
+[data-typus="server-card"] > div:first-child {
+  background: var(--w98-title) !important;
+  border-radius: 0 !important;
+}
+
+/* barras de título azul-marinho */
+[data-typus="header"] {
+  background: var(--w98-title) !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  margin: 3px;
+  min-height: 30px;
+  font-weight: 700;
+}
+
+[data-typus="members"] > div > div:first-child {
+  background: var(--w98-title) !important;
+  color: #ffffff !important;
+  margin: 3px;
+  min-height: 28px;
+  font-weight: 700;
+}
+
+[data-typus="header"] *,
+[data-typus="members"] > div > div:first-child * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* barra de título nas janelas de aviso: o título vira a barra */
+[data-typus="dialog"] > div {
+  padding: 3px 3px 12px !important;
+}
+
+[data-typus="dialog"] > div > span:first-of-type {
+  display: block;
+  margin: 0 0 12px !important;
+  padding: 3px 6px;
+  background: var(--w98-title);
+  color: #ffffff;
+  font-size: 13px !important;
+  font-weight: 700;
+  line-height: 18px !important;
+  text-align: left !important;
+}
+
+[data-typus="dialog"] > div > :not(span:first-of-type) {
+  margin-inline: 9px;
+}
+
+/* tela de entrar: janela no meio da área de trabalho */
+[data-typus="login"] {
+  background: #008080 !important;
+}
+
+[data-typus="login"] > div {
+  background: #008080 !important;
+}
+
+[data-typus="login-card"] {
+  padding: 3px 3px 16px !important;
+  color: #000000 !important;
+}
+
+[data-typus="login-card"]::before {
+  content: "Bem-vindo ao TYPUS";
+  display: block;
+  margin-bottom: 12px;
+  padding: 3px 6px;
+  background: var(--w98-title);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+[data-typus="login-card"] > * {
+  margin-inline: 12px;
+}
+
+/* área do chat e listas: caixa branca afundada */
+[data-typus="chat"] {
+  background: #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-sunken), 0 0 0 3px var(--w98-face) !important;
+  margin: 3px;
+}
+
+/* configurações: a janela inteira cinza, sem vidro */
+[data-typus="settings"] {
+  background: var(--w98-face) !important;
+  backdrop-filter: none !important;
+}
+
+[data-typus="settings-page"] {
+  margin: 6px;
+}
+
+/* ==================================================== mensagens === */
+[data-typus="message"]:hover {
+  background: var(--w98-light) !important;
+}
+
+/* itens das listas (canais, conversas): texto preto, escolhido em azul */
+[data-typus="nav-item"] {
+  --color: #000000 !important;
+  border-radius: 0 !important;
+}
+
+[data-typus="nav-item"][data-attention="muted"] {
+  --color: #808080 !important;
+}
+
+[data-typus="nav-item"][data-attention="active"] {
+  font-weight: 700;
+}
+
+[data-typus="nav-item"][data-attention="selected"] {
+  --color: #ffffff !important;
+  background: var(--w98-navy) !important;
+}
+
+[data-typus="nav-item"][data-attention="selected"] * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+[data-typus="nav-item"][data-attention="selected"]:focus-visible {
+  outline-color: #ffffff !important;
+}
+
+/* ======================================================= botões === */
+[data-typus="button"],
+[data-typus="select"],
+[data-typus="tab"] mdui-segmented-button {
+  background: var(--w98-face) !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-raised) !important;
+  font-weight: 400 !important;
+  min-height: 23px;
+  transition: none !important;
+}
+
+[data-typus="button"] *,
+[data-typus="select"] * {
+  color: #000000 !important;
+}
+
+/* o botão principal tem a moldura preta do "botão padrão" */
+[data-typus="button"][data-variant="filled"],
+[data-typus="button"][data-variant="primary"] {
+  box-shadow: 0 0 0 1px #000000, var(--w98-raised) !important;
+}
+
+[data-typus="button"][data-variant="_error"],
+[data-typus="button"][data-variant="error"] {
+  color: #a00000 !important;
+}
+
+[data-typus="button"][data-variant="_error"] *,
+[data-typus="button"][data-variant="error"] * {
+  color: #a00000 !important;
+}
+
+[data-typus="button"]:active,
+[data-typus="select"]:active {
+  box-shadow: var(--w98-pressed) !important;
+  padding-top: 1px;
+  padding-left: 1px;
+}
+
+/* desativado: texto gravado em relevo, como no 98 */
+[data-typus="button"]:disabled,
+[data-typus="button"][aria-disabled="true"],
+[data-typus="icon-button"]:disabled {
+  color: #808080 !important;
+  text-shadow: 1px 1px 0 #ffffff !important;
+}
+
+[data-typus="button"]:disabled *,
+[data-typus="icon-button"]:disabled * {
+  color: #808080 !important;
+  fill: #808080 !important;
+}
+
+/* botões de ícone: lisos como na barra de ferramentas, saltam no mouse */
+[data-typus="icon-button"] {
+  background: transparent !important;
+  color: #000000;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+[data-typus="icon-button"]:hover {
+  box-shadow: inset -1px -1px var(--w98-shadow), inset 1px 1px var(--w98-hi) !important;
+}
+
+[data-typus="icon-button"]:active {
+  box-shadow: inset -1px -1px var(--w98-hi), inset 1px 1px var(--w98-shadow) !important;
+}
+
+[data-typus="icon-button"][data-variant="filled"],
+[data-typus="icon-button"][data-variant="tonal"],
+[data-typus="icon-button"][data-variant="outlined"] {
+  background: var(--w98-face) !important;
+  box-shadow: var(--w98-raised) !important;
+}
+
+[data-typus="icon-button"][data-variant="filled"]:active,
+[data-typus="icon-button"][data-variant="tonal"]:active,
+[data-typus="icon-button"][data-variant="outlined"]:active {
+  box-shadow: var(--w98-pressed) !important;
+}
+
+[data-typus="header"] [data-typus="icon-button"] {
+  color: #ffffff !important;
+}
+
+/* controles da chamada: botões cinza grandes */
+[data-typus="call-controls"] {
+  background: var(--w98-face) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-window) !important;
+}
+
+[data-typus="call-controls"] button {
+  background: var(--w98-face) !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-raised) !important;
+}
+
+[data-typus="call-controls"] button * {
+  color: #000000 !important;
+}
+
+[data-typus="call-controls"] button:active {
+  box-shadow: var(--w98-pressed) !important;
+}
+
+/* ícones de servidor e da barra lateral */
+[data-typus="rail"] [data-typus="button"],
+[data-typus="sidebar"] [data-typus="button"],
+[data-typus="user-footer"] [data-typus="button"] {
+  min-height: 0;
+}
+
+/* FAB vira um botão comum */
+[data-typus="fab"]::part(button) {
+  background: var(--w98-face);
+  color: #000000;
+  border-radius: 0;
+  box-shadow: var(--w98-raised);
+}
+
+/* ======================================== campos (caixas brancas) === */
+[data-typus="input"]:is(input, textarea),
+[data-typus="composer"],
+[data-typus="quick-switcher"] input {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-sunken) !important;
+  outline: none !important;
+}
+
+[data-typus="input"]:is(input, textarea) {
+  padding: 4px 6px !important;
+}
+
+[data-typus="composer"] {
+  margin: 4px;
+}
+
+[data-typus="composer"] *:not([data-typus="icon-button"]) {
+  color: #000000;
+}
+
+mdui-text-field[data-typus="input"]::part(container) {
+  background: #ffffff;
+  border-radius: 0;
+  box-shadow: var(--w98-sunken);
+}
+
+mdui-text-field[data-typus="input"]::part(label) {
+  color: #000000;
+  background: transparent;
+}
+
+mdui-text-field[data-typus="input"]::part(input) {
+  color: #000000;
+}
+
+mdui-text-field[data-typus="input"]::part(helper),
+mdui-text-field[data-typus="input"]::part(counter) {
+  color: #000000;
+}
+
+/* caixa de seleção: campo branco com o botão da seta à direita */
+[data-typus="select"] {
+  background: #ffffff !important;
+  box-shadow: var(--w98-sunken) !important;
+}
+
+/* ================================== checkbox, rádio, slider, abas === */
+mdui-checkbox[data-typus="checkbox"] {
+  border-radius: 0;
+  --mdui-color-primary: 0, 0, 128;
+}
+
+mdui-checkbox[data-typus="checkbox"]::part(unchecked-icon) {
+  color: #000000;
+}
+
+mdui-checkbox[data-typus="checkbox"]::part(control) {
+  border-radius: 0;
+}
+
+input[data-typus="checkbox"] {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  background: #ffffff;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-sunken);
+  display: inline-grid;
+  place-content: center;
+}
+
+input[data-typus="checkbox"]:checked::after {
+  content: "✓";
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000000;
+}
+
+mdui-radio[data-typus="radio"] {
+  --mdui-color-primary: 0, 0, 0;
+}
+
+/* slider: trilho afundado e alça cinza saltada */
+mdui-slider[data-typus="slider"] {
+  --mdui-color-primary: 192, 192, 192;
+  --mdui-color-surface-container-highest: 255, 255, 255;
+}
+
+mdui-slider[data-typus="slider"]::part(track-inactive),
+mdui-slider[data-typus="slider"]::part(track-active) {
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: var(--w98-sunken);
+}
+
+mdui-slider[data-typus="slider"]::part(handle) {
+  border-radius: 0;
+  background: var(--w98-face);
+  box-shadow: var(--w98-raised);
+}
+
+/* permitir / neutro / negar: três botões encaixados */
+[data-typus="switch"] {
+  background: var(--w98-face) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-sunken) !important;
+  padding: 2px;
+}
+
+[data-typus="switch"] > * {
+  border-radius: 0 !important;
+}
+
+/* abas e botões segmentados: o escolhido fica afundado */
+[data-typus="tab"] {
+  border-radius: 0 !important;
+  background: transparent !important;
+  gap: 2px;
+}
+
+[data-typus="tab"] mdui-segmented-button {
+  --mdui-color-secondary-container: 192, 192, 192;
+  --mdui-shape-corner-full: 0;
+}
+
+[data-typus="tab"] mdui-segmented-button[selected] {
+  background: var(--w98-light) !important;
+  box-shadow: var(--w98-pressed) !important;
+  font-weight: 700 !important;
+}
+
+/* listas de opções das configurações: botões grandes do Painel de Controle */
+[data-typus="card"] {
+  background: var(--w98-face) !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-raised) !important;
+}
+
+[data-typus="card"] * {
+  color: inherit;
+}
+
+[data-typus="card"]:active {
+  box-shadow: var(--w98-pressed) !important;
+}
+
+/* =================================================== flutuantes === */
+[data-typus="tooltip"] {
+  background: #ffffe1 !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 0 1px #000000 !important;
+  font-size: 12px;
+}
+
+[data-typus="tooltip"] * {
+  color: #000000 !important;
+}
+
+[data-typus="menu"] {
+  padding: 3px !important;
+}
+
+[data-typus="menu"] :is(a, button, [role="menuitem"]) {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+[data-typus="menu"] :is(a, button, [role="menuitem"]):hover {
+  background: var(--w98-navy) !important;
+  color: #ffffff !important;
+}
+
+[data-typus="menu"] :is(a, button, [role="menuitem"]):hover * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* abrir menus e janelas "em degraus", como no 98 */
+@keyframes typ-w98-open {
+  from {
+    clip-path: inset(0 100% 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+[data-typus="menu"],
+[data-typus="dialog"] > div {
+  animation: typ-w98-open 0.12s steps(4);
+}
+
+/* escolher imagem (ícone, avatar, banner): moldura branca afundada */
+[data-typus="image-input"] {
+  background: #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-sunken) !important;
+}
+
+/* ======================================================== avatares === */
+[data-typus="avatar"] {
+  border-radius: 0 !important;
+}
+
+/* ============================================ setas das laterais === */
+[data-typus="edge-flag"] button {
+  background: var(--w98-face) !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: var(--w98-raised) !important;
+  backdrop-filter: none !important;
+}
+
+[data-typus="edge-flag"] button:active {
+  box-shadow: var(--w98-pressed) !important;
+}
+
+/* ============================================ barras de rolagem === */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background: repeating-conic-gradient(#c0c0c0 0 25%, #ffffff 0 50%) 0 0 / 2px
+    2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--w98-face);
+  border-radius: 0;
+  box-shadow: var(--w98-raised);
+}
+
+::-webkit-scrollbar-button:single-button {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: var(--w98-face);
+  box-shadow: var(--w98-raised);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--w98-face);
+}
+
+/* quem pede menos movimento não recebe a abertura em degraus */
+@media (prefers-reduced-motion: reduce) {
+  [data-typus="menu"],
+  [data-typus="dialog"] > div {
+    animation: none;
+  }
+}
