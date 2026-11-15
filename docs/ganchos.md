@@ -53,6 +53,7 @@ Estes ganchos ficam no próprio controle, em todo lugar onde ele aparece.
 | `input` | campo de texto: o `mdui-text-field` e os campos e áreas de texto comuns |
 | `select` | botão de escolher uma opção (abre uma lista) |
 | `checkbox` | caixa de marcar (`mdui-checkbox` ou `input[type=checkbox]`) |
+| `toggle` | chave liga/desliga no fim de uma linha das configurações (`mdui-switch`). Nas linhas de opção, o que antes era caixa de marcar agora é esta chave |
 | `radio` | opção de escolha única (`mdui-radio`) |
 | `switch` | seletor permitir / neutro / negar das permissões |
 | `slider` | controle deslizante (`mdui-slider`) |
@@ -76,13 +77,14 @@ Estes ganchos ficam no próprio controle, em todo lugar onde ele aparece.
 
 ## Componentes MDUI (`::part`)
 
-Alguns controles (`mdui-text-field`, `mdui-checkbox`, `mdui-slider`, `mdui-fab`) desenham o
+Alguns controles (`mdui-text-field`, `mdui-checkbox`, `mdui-switch`, `mdui-slider`, `mdui-fab`) desenham o
 interior num "shadow DOM", que o CSS comum não alcança. Para mexer dentro deles, use `::part()`:
 
 | Controle | Partes |
 |---|---|
 | `mdui-text-field` | `container` (a caixa), `label`, `input`, `helper`, `counter`, `icon`, `end-icon` |
 | `mdui-checkbox` | `control`, `unchecked-icon`, `checked-icon`, `indeterminate-icon`, `label` |
+| `mdui-switch` | `track` (o trilho), `thumb` (a bolinha), `checked-icon`, `unchecked-icon` (o TYPUS esconde os ícones). Ligada, ganha o atributo `checked`: `mdui-switch[data-typus="toggle"][checked]::part(track)` |
 | `mdui-slider` | `track-inactive`, `track-active`, `handle`, `tickmark` |
 | `mdui-fab` | `button`, `icon`, `label` |
 

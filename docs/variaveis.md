@@ -44,12 +44,13 @@ Presença (bolinha de status): `--typ-color-presence-online`, `-idle`, `-busy`, 
 | Variável | O que faz |
 |---|---|
 | `--typ-c-shell-app` | o fundo atrás de tudo (a "área de trabalho") |
-| `--typ-c-shell-sidebar` | painel da barra lateral |
+| `--typ-c-shell-sidebar` | painel da barra lateral e da lista de membros (um tom abaixo do chat) |
 | `--typ-c-shell-content` | painel atrás do chat |
 | `--typ-c-shell-main` | painel do chat |
-| `--typ-c-shell-section` | seções dentro da barra lateral |
+| `--typ-c-shell-section` | seções dentro da barra lateral (ex.: as categorias de canais) |
 | `--typ-c-shell-backdrop` | filtro atrás dos painéis (ex.: `blur(20px)`) |
-| `--typ-c-edge-strip` | sombra das faixas das setas de recolher |
+| `--typ-c-edge-strip` | fundo das faixas das setas de recolher (nenhum por padrão) |
+| `--typ-surface-raised` | superfície "elevada" de cartões e linhas (configurações, painel do Início, perfil): cinza no tema escuro, branco no claro |
 
 **Papel de parede:** quando a pessoa usa um papel de parede, ele fica em `--typ-background-app`.
 Para respeitar o papel de parede dela e só usar o seu fundo quando não houver, escreva:
@@ -157,6 +158,7 @@ Ajustes finos por parte do app. Todos são opcionais.
 |---|---|
 | `--typ-c-settings-content-bg`, `--typ-c-settings-content-radius` | área de conteúdo |
 | `--typ-c-settings-selected-bg`, `--typ-c-settings-selected-fg`, `--typ-c-settings-item-radius` | item selecionado no menu |
+| `--typ-c-settings-row-bg` | fundo das linhas de opção e dos grupos (blocos arredondados com linhas finas entre as opções). Padrão: `--typ-surface-raised` (cinza no escuro, branco no claro) |
 
 ### Chamadas
 | Variável | O que faz |
